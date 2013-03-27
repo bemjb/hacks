@@ -4,7 +4,7 @@
         <script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
         <style id="stylesheet">
             .drawer {
-                height: 400px;
+                height: 0px;
                 overflow: hidden;
                 border: 5px solid black;
                 background-color: green;
@@ -26,7 +26,6 @@
                     transitioning = false;
 
                 function filterOff() {
-                    console.log("turning filter off!");
                     drawer.removeClass('drawer-transition');
                     drawer.removeClass('drawer-filter');
                     drawer.removeClass('drawer-filter-expanded');
@@ -42,18 +41,18 @@
                             drawer.addClass('drawer-filter-expanded');
                             drawer.addClass('drawer-transition');
                             setTimeout(function () {
-                                drawer.height();
-                                console.log("added filter");
+                                drawer.removeClass('drawer-filter-expanded');
                                 drawer.addClass('drawer-filter');
+                                drawer.height(0);
                             }, 0);
                         }
                         else {
                             drawer.addClass('drawer-filter');
                             drawer.addClass('drawer-transition');
                             setTimeout(function () {
-                                drawer.height();
-                                console.log("added filter expanded");
+                                drawer.removeClass('drawer-filter');
                                 drawer.addClass('drawer-filter-expanded');
+                                drawer.height(400);
                             }, 0);
                         }
                         drawer.on('webkitTransitionEnd', filterOff);
