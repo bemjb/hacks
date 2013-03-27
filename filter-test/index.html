@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+        <style id="stylesheet">
+            .drawer {
+                height: 0px;
+                overflow: hidden;
+                border: 5px solid black;
+                background-color: green;
+            }
+            .drawer-transition {
+                -webkit-transition: height 1s, -webkit-filter 1s;
+            }
+            .drawer-filter {
+                -webkit-filter: custom(url(shaders/fold.vs) mix(url(shaders/fold.fs) multiply source-atop), 8 50 border-box, transform perspective(1000) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg), t 0.7, spins 1.5, phase -0.7, shadow 1.5, mapDepth 40, mapCurve -0.3, minSpacing 0, useColoredBack 1, backColor 0.5 0.5 0.5 1);
+            }
+            .drawer-filter-expanded {
+                -webkit-filter: custom(url(shaders/fold.vs) mix(url(shaders/fold.fs) multiply source-atop), 8 50 border-box, transform perspective(1000) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg), t 0, spins 1.5, phase -0.7, shadow 1.5, mapDepth 40, mapCurve -0.3, minSpacing 0, useColoredBack 1, backColor 0.5 0.5 0.5 1);
+            }
+        </style>
+        <script>
+            $(function () {
+                var drawer = $(".drawer"),
+                    opened = false,
+                    transitioning = false;
+
+                function filterOff() {
+                    drawer.removeClass('drawer-transition');
+                    drawer.removeClass('drawer-filter');
+                    drawer.removeClass('drawer-filter-expanded');
+                    drawer.off('webkitTransitionEnd', filterOff);
+                    opened = !opened;
+                    transitioning = false;
+                }
+
+                drawer.on("click", function () {
+                    if (!transitioning) {
+                        if (opened) {
+                            transitioning = true;
+                            drawer.addClass('drawer-filter-expanded');
+                            drawer.addClass('drawer-transition');
+                            drawer.height(0);
+                            drawer.addClass('drawer-filter');
+                        }
+                        else {
+                            transitioning = true;
+                            drawer.addClass('drawer-filter');
+                            drawer.addClass('drawer-transition');
+                            drawer.height(400);
+                            drawer.addClass('drawer-filter-expanded');
+                        }
+                        drawer.on('webkitTransitionEnd', filterOff);
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="drawer">
+            That thou hast her it is not all my grief,<br/>
+            And yet it may be said I loved her dearly;<br/>
+            That she hath thee is of my wailing chief,<br/>
+            A loss in love that touches me more nearly. <br/>
+            Loving offenders thus I will excuse ye:<br/>
+            Thou dost love her, because thou know'st I love her;<br/>
+            And for my sake even so doth she abuse me,<br/>
+            Suffering my friend for my sake to approve her.<br/>
+            If I lose thee, my loss is my love's gain,<br/>
+            And losing her, my friend hath found that loss;<br/>
+            Both find each other, and I lose both twain,<br/>
+            And both for my sake lay on me this cross:<br/>
+               But here's the joy; my friend and I are one;<br/>
+               Sweet flattery! then she loves but me alone.<br/>
+        </div>
+    </body>
+</html>
