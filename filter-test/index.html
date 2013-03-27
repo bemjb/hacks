@@ -26,6 +26,7 @@
                     transitioning = false;
 
                 function filterOff() {
+                    console.log("turning filter off!");
                     drawer.removeClass('drawer-transition');
                     drawer.removeClass('drawer-filter');
                     drawer.removeClass('drawer-filter-expanded');
@@ -36,19 +37,20 @@
 
                 drawer.on("click", function () {
                     if (!transitioning) {
+                        transitioning = true;
                         if (opened) {
-                            transitioning = true;
                             drawer.addClass('drawer-filter-expanded');
                             drawer.addClass('drawer-transition');
                             setTimeout(function () {
+                                console.log("added filter");
                                 drawer.addClass('drawer-filter');
                             }, 0);
                         }
                         else {
-                            transitioning = true;
                             drawer.addClass('drawer-filter');
                             drawer.addClass('drawer-transition');
                             setTimeout(function () {
+                                console.log("added filter expanded");
                                 drawer.addClass('drawer-filter-expanded');
                             }, 0);
                         }
