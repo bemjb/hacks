@@ -42,6 +42,7 @@
                             drawer.addClass('drawer-filter-expanded');
                             drawer.addClass('drawer-transition');
                             setTimeout(function () {
+                                drawer.height();
                                 console.log("added filter");
                                 drawer.addClass('drawer-filter');
                             }, 0);
@@ -50,6 +51,7 @@
                             drawer.addClass('drawer-filter');
                             drawer.addClass('drawer-transition');
                             setTimeout(function () {
+                                drawer.height();
                                 console.log("added filter expanded");
                                 drawer.addClass('drawer-filter-expanded');
                             }, 0);
