@@ -8,7 +8,9 @@
                 overflow: hidden;
                 border: 5px solid black;
                 background-color: green;
-                -webkit-transition: -webkit-filter 1s;
+            }
+            .drawer-transition {
+                -webkit-transition: height 1s, -webkit-filter 1s;
             }
             .drawer-filter {
                 -webkit-filter: custom(url(shaders/fold.vs) mix(url(shaders/fold.fs) multiply source-atop), 8 50 border-box, transform perspective(1000) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg), t 0.7, spins 1.5, phase -0.7, shadow 1.5, mapDepth 40, mapCurve -0.3, minSpacing 0, useColoredBack 1, backColor 0.5 0.5 0.5 1);
@@ -24,6 +26,7 @@
                     transitioning = false;
 
                 function filterOff() {
+                    drawer.removeClass('drawer-transition');
                     drawer.removeClass('drawer-filter');
                     drawer.removeClass('drawer-filter-expanded');
                     drawer.off('webkitTransitionEnd', filterOff);
@@ -36,6 +39,7 @@
                         if (opened) {
                             transitioning = true;
                             drawer.addClass('drawer-filter-expanded');
+                            drawer.addClass('drawer-transition');
                             setTimeout(function () {
                                 drawer.addClass('drawer-filter');
                             }, 0);
@@ -43,6 +47,7 @@
                         else {
                             transitioning = true;
                             drawer.addClass('drawer-filter');
+                            drawer.addClass('drawer-transition');
                             setTimeout(function () {
                                 drawer.addClass('drawer-filter-expanded');
                             }, 0);
